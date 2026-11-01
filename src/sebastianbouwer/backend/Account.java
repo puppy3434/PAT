@@ -12,9 +12,10 @@ import java.util.List;
  * @author user
  */
 public class Account {
+
     private String userID, username, password, joinDate;
     private boolean isAdmin;
-    
+
     public Account(String sUI, String sU, String sP, String sJD, boolean sIA) {
         userID = sUI;
         username = sU;
@@ -22,25 +23,31 @@ public class Account {
         joinDate = sJD;
         isAdmin = sIA;
     }
-    
+
     public String getUserID() {
         return userID;
     }
+
     public String getUsername() {
         return username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public String getJoinDate() {
         return joinDate;
     }
+
     public boolean getAdmin() {
         return isAdmin;
     }
+
     public void setPassword(String pass) {
-    password = pass;
+        password = pass;
     }
+
     public void setUsername(String user) {
         username = user;
     }

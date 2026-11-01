@@ -17,56 +17,53 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ShowManager {
+
     private List<show> shows;
     private List<episode> episodeCache;
     private final String sFilePath = "src/shows.json";
     private final String eFilePath = "src/episodes_cache.json";
     private final Gson gson;
-    
+
     public ShowManager() {
-      gson = new GsonBuilder().setPrettyPrinting().create();
-      shows = new ArrayList<>();
-      episodeCache = new ArrayList<>();
-      readShow();
-      readEpisodes();
+        gson = new GsonBuilder().setPrettyPrinting().create();
+        shows = new ArrayList<>();
+        episodeCache = new ArrayList<>();
+        readShow();
+        readEpisodes();
     }
-    
+
     private void readShow() {
-       File file = new File(sFilePath);
-        try (Reader reader = new FileReader(sFilePath)){//gson only accepts a reader and not scanner :(
+        File file = new File(sFilePath);
+        try (Reader reader = new FileReader(sFilePath)) {//gson only accepts a reader and not scanner :(
             show[] arrShow = gson.fromJson(reader, show[].class);
             if (arrShow != null) {
                 shows = new ArrayList<>(java.util.Arrays.asList(arrShow));//populates shows list
             }
-        }
-        catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             try (Writer write = new FileWriter(sFilePath)) {
                 write.write("[]");
                 System.out.println("shows.json was missing so i made another one");
-            }
-            catch(Exception d) {
+            } catch (Exception d) {
                 System.out.println("error idk " + d.getMessage());
             }
-        }
-        catch(Exception e) {//reader wants an IOException for some reason and i dont want to throw it
+        } catch (Exception e) {//reader wants an IOException for some reason and i dont want to throw it
             System.out.println("completele failure (to read) " + e.getMessage());
-        } 
+        }
     }
-    
+
     public void saveShow() {
         try (Writer writer = new FileWriter(sFilePath)) {
             gson.toJson(shows, writer);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error Saving " + e.getMessage());
         }
     }
-    
+
     public void addShow(show newShow) {
         shows.add(newShow);
         saveShow();
     }
-    
+
     public boolean showExists(int aniListID, int malID, String engName, String forName) {
         for (int i = 0; i < shows.size(); i++) {
             if (shows.get(i).getAnilistID() == aniListID
@@ -78,43 +75,39 @@ public class ShowManager {
         }
         return false;
     }
-    
+
     private void readEpisodes() {
         try (Reader read = new FileReader(eFilePath)) {
             episode[] arrEpisodes = gson.fromJson(read, episode[].class);
             if (arrEpisodes != null) {
                 episodeCache = new ArrayList<>(Arrays.asList(arrEpisodes));
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("creating cache " + e.getMessage());
             try (Writer write = new FileWriter(eFilePath)) {
                 write.write("[]");
                 System.out.println("created ep cache!");
-            }
-            catch(IOException er) {
+            } catch (IOException er) {
                 System.out.println("error creating cache " + e.getMessage());
             }
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("error reading ep cache " + e.getMessage());
         }
     }
-    
+
     private void saveEpisodes() {
         try (Writer write = new FileWriter(eFilePath)) {
             gson.toJson(episodeCache, write);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("could not save episodes " + e.getMessage());
         }
     }
-    
+
     public void cacheEpisodes(List<episode> newEpisodes) {
         episodeCache.addAll(newEpisodes);
         saveEpisodes();
     }
-    
+
     public List<episode> getCachedShowEps(int aniListID, int malID, String engName, String forName) {
         List<episode> arrEpisodes = new ArrayList<>();
         for (int i = 0; i < episodeCache.size(); i++) {
@@ -124,7 +117,7 @@ public class ShowManager {
         }
         return arrEpisodes;
     }
-    
+
     public boolean hasCache(int aniListID, int malID, String engName, String forName) {
         for (int i = 0; i < episodeCache.size(); i++) {
             if (episodeCache.get(i).getAnilistID() == aniListID) {
@@ -133,11 +126,11 @@ public class ShowManager {
         }
         return false;
     }
-    
+
     public List<show> getAllShows() {
         return shows;
     }
-    
+
     public void removeShow(int anilistID) {
         for (int i = 0; i < shows.size(); i++) {
             if (shows.get(i).getAnilistID() == anilistID) {

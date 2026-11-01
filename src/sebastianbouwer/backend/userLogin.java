@@ -13,34 +13,34 @@ import java.time.LocalDate;
 import java.util.*;
 import sebastianbouwer.backend.Account;
 
-public class userLogin { 
+public class userLogin {
+
     private AccountManager manager;
-    
+
     public userLogin() {
         manager = new AccountManager();
     }
-    
+
     public boolean registerAcc(String username, String password) {
         if (manager.searchAccUser(username) != null) {//if username already exists
             return false; //say no i wont make this account
-        } 
-        
+        }
+
         String newID = UUID.randomUUID().toString();//creates a random string userID for the account
         String joinDate = LocalDate.now().toString();
-        String theme = "Dark", reminderTime = "20:00", localSavePath = "", onlineSavePath = ""; 
+        String theme = "Dark", reminderTime = "20:00", localSavePath = "", onlineSavePath = "";
         int maxCacheSize = 200; //Mb
         boolean notifications = true;
         Account newAcc = new Account(newID, username, password, joinDate, false);
         manager.addAcc(newAcc);
         return true;//say yes i will make this account
     }
-    
+
     public Account loginUser(String username, String password) {
         Account acc = manager.searchAccUser(username);
         if (acc != null /*does account exist*/ && acc.getPassword().equals(password)) {
             return acc;
-        }
-        else {
+        } else {
             System.out.println("wrong username or password");
         }
         return null;

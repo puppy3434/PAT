@@ -7,6 +7,12 @@ package sebastianbouwer.backend;
 /**
  *
  * @author user
+ * 
+ * The RollManager class handles the core logic of the challenge. 
+ * It performs weighted random selection (RNG) of shows, calculates probabilities, 
+ * chains related franchise shows together, and logs the roll history.
+ * 
+ * @author Sebastian Bouwer
  */
 import com.google.gson.*;
 import sebastianbouwer.backend.*;
@@ -16,84 +22,105 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class RollManager {
+
     private final Random RANDOM;
     private List<RollRecord> history;
     private final Gson gson;//creates gson object so i cant accidentally overwrite it and ruin everything
     private final String historyFilePath = "src/roll_history.json";
-    
+
     public RollManager() {
         RANDOM = new Random();
         gson = new GsonBuilder().setPrettyPrinting().create();
         history = new ArrayList<>();
         readHistory();
     }
-    
+/**
+     * The main rolling method. Picks shows from either the Master List or AniList API.
+     * 
+     * @param targetUserID The ID of the user receiving the shows.
+     * @param batchCount How many shows to roll.
+     * @param mode The weighting mode ("higher", "lower", or "unweighted").
+     * @param isRandomRoll If true, bypasses the Master List and calls the API.
+     * @param masterList The list of all available shows.
+     * @param qM The QueueManager to add rolled shows to.
+     * @param api The AniListAPI for fetching related shows.
+     * @return A List of RollResult objects containing the base show and its franchise.
+     */
     public List<RollResult> roll(String targetUserID, int batchCount, String mode, boolean isRandomRoll,
             List<show> masterList, QueueManager qM, AniListAPI api) {
         List<RollResult> rolled = new ArrayList<>();
         int batch = Math.abs(batchCount);//how limit min/max; abs ensures no negative i think
-            if (isRandomRoll) {
-                for (int i = 0; i < batch; i++) {
-                    show random = api.getRandomAnime();
-                    if (random != null){
-                        List<show> franchise = addFranchiseToQueue(random, masterList, api, targetUserID, qM);
-                        rolled.add(new RollResult(random, franchise));
-                        addHistoryRecord(new RollRecord(targetUserID, random.getAnilistID(), random.getEngTitle(),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
-                                "Random"));
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    }
-                    catch (InterruptedException e) {
-                        
-                    }
-                }
-                return rolled;
-            }
-            List<show> pool = new ArrayList<>();
-            List<QueueItem> queue = qM.getUserQueue(targetUserID);
-            for (int i = 0; i < masterList.size(); i++) {//make sure no dupe
-                show show = masterList.get(i);
-                boolean inQ = false;
-                for (int k = 0; k < queue.size(); k++) {
-                    if (queue.get(k).getAnilistID() == show.getAnilistID()) {
-                        inQ = true;
-                        break;
-                    }
-                }
-                if (!inQ) {
-                    pool.add(show);
-                }
-            }
-            //roll from pool list
+        if (isRandomRoll) {
             for (int i = 0; i < batch; i++) {
-                double weight = 0.00;
-                for (int k = 0; k < pool.size(); k++) {
-                    weight += weight(pool.get(k), mode);
+                show random = api.getRandomAnime();
+                if (random != null) {
+                    List<show> franchise = addFranchiseToQueue(random, masterList, api, targetUserID, qM);
+                    rolled.add(new RollResult(random, franchise));
+                    addHistoryRecord(new RollRecord(targetUserID, random.getAnilistID(), random.getEngTitle(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
+                            "Random"));
                 }
-                double random = RANDOM.nextDouble() * weight;
-                double currentWeight = 0.00;
-                for (int k = 0; k < pool.size(); k++) {
-                    show show = pool.get(k);
-                    currentWeight += weight(show, mode);
-                    if (currentWeight > random) {
-                        pool.remove(k);//no duplicate in batch because we steal this away from batch
-                        List<show> franchise = addFranchiseToQueue(show, masterList, api, targetUserID, 
-                                qM);
-                        rolled.add(new RollResult(show, franchise));
-                        addHistoryRecord(new RollRecord(targetUserID, show.getAnilistID(), show.getEngTitle(),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
-                                "Master List"));
-                        break;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+
+                }
+            }
+            return rolled;
+        }
+        List<show> pool = new ArrayList<>();
+        List<QueueItem> queue = qM.getUserQueue(targetUserID);
+        for (int i = 0; i < masterList.size(); i++) {//make sure no dupe
+            show show = masterList.get(i);
+            boolean inQ = false;
+            for (int k = 0; k < queue.size(); k++) {
+                if (queue.get(k).getAnilistID() == show.getAnilistID()) {
+                    inQ = true;
+                    break;
+                }
+            }
+            if (!inQ) {
+                pool.add(show);
+            }
+        }
+        //roll from pool list
+        for (int i = 0; i < batch; i++) {
+            double weight = 0.00;
+            for (int k = 0; k < pool.size(); k++) {
+                weight += weight(pool.get(k), mode);
+            }
+            double random = RANDOM.nextDouble() * weight;
+            double currentWeight = 0.00;
+            for (int k = 0; k < pool.size(); k++) {
+                show show = pool.get(k);
+                currentWeight += weight(show, mode);
+                if (currentWeight > random) {
+                    pool.remove(k);//no duplicate in batch because we steal this away from batch
+                    List<show> franchise = addFranchiseToQueue(show, masterList, api, targetUserID,
+                            qM);
+                    rolled.add(new RollResult(show, franchise));
+                    addHistoryRecord(new RollRecord(targetUserID, show.getAnilistID(), show.getEngTitle(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
+                            "Master List"));
+                    break;
                 }
             }
         }
-            return rolled;
+        return rolled;
     }
-    
-    private List<show> addFranchiseToQueue(show base, List<show> masterList, AniListAPI api, 
-            String userID, QueueManager qM){
+ /**
+     * Adds a rolled show AND its related franchise (sequels, prequels) to the queue.
+     * Sorts the franchise chronologically by release year before adding.
+     * 
+     * @param base The main show that was rolled.
+     * @param masterList The master list to cross-reference related shows.
+     * @param api The AniListAPI to fetch relations.
+     * @param userID The user receiving the shows.
+     * @param qM The QueueManager to add items to.
+     * @return A List of Show objects representing the full franchise added.
+     */
+    private List<show> addFranchiseToQueue(show base, List<show> masterList, AniListAPI api,
+            String userID, QueueManager qM) {
         List<show> franchise = new ArrayList<>();
         franchise.add(base); // Add the rolled show first
         java.util.Map<String, List<show>> relations = api.getRelatedShows(base.getAnilistID());
@@ -113,7 +140,7 @@ public class RollManager {
                                     break;
                                 }
                             }
-                            
+
                             if (!alreadyInList) {
                                 franchise.add(relatedShow);
                             }
@@ -143,53 +170,54 @@ public class RollManager {
         }
         return franchise;
     }
-    
+
     private void readHistory() {
         try (Reader read = new FileReader(historyFilePath)) {
             RollRecord[] loaded = gson.fromJson(read, RollRecord[].class);
             if (loaded != null) {
                 history = new ArrayList<>(Arrays.asList(loaded));
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("creating writer " + e.getMessage());
             try (Writer write = new FileWriter(historyFilePath)) {
                 write.write("[]");
                 System.out.println("Made roll_history.json");
-            }
-            catch (IOException er) {
+            } catch (IOException er) {
                 System.out.println("could not make history " + er.getMessage());
             }
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("couldnt read history " + e.getMessage());
         }
     }
-    
+ /**
+     * Adds a new record to the roll history and saves it to JSON.
+     * 
+     * @param record The RollRecord to save.
+     */
     private void addHistoryRecord(RollRecord record) {
         history.add(record);
         try (Writer write = new FileWriter(historyFilePath)) {
             gson.toJson(history, write);
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("error adding to history " + e.getMessage());
         }
     }
-    
+
     public List<RollRecord> getUserHistory(String userID) {
         List<RollRecord> history = new ArrayList<>();
         for (int i = 0; i < this.history.size(); i++) {
             if (this.history.get(i).getUserID().equals(userID)) {
                 history.add(this.history.get(i));
-            } 
-       }
+            }
+        }
         return history;
     }
-    
+
     public static class RollRecord {//cool nested class ngl
+
         private String userID, engTitle, dateRolled, rollType;
         private int anilistID;
-        
+
         public RollRecord(String sUI, int sAID, String sET, String sDR, String sRT) {
             userID = sUI;
             anilistID = sAID;
@@ -198,44 +226,60 @@ public class RollManager {
             dateRolled = dtf.format(LocalDateTime.now());
             rollType = sRT;
         }
+
         public String getUserID() {
             return userID;
         }
+
         public int getAnilistID() {
             return anilistID;
         }
+
         public String getEngTitle() {
             return engTitle;
         }
+
         public String getDateRolled() {
             return dateRolled;
         }
+
         public String getRollType() {
             return rollType;
         }
-        
+
     }
-    
+
     public static class RollResult {
+
         public show baseShow;
         public List<show> franchiseShows;
-        
+
         public RollResult(show base, List<show> franchise) {
             baseShow = base;
             franchiseShows = franchise;
         }
     }
-    
+ /**
+     * Calculates the weight of a show based on the selected mode.
+     * 
+     * @param show The show to calculate the weight for.
+     * @param mode The weighting mode ("higher", "lower", or "unweighted").
+     * @return A double representing the calculated weight.
+     */
     public double weight(show show, String mode) {
         double rating = show.getRating();
         if (rating <= 0) {
             rating = 1.0;
         }
         switch (mode) {
-            case "higher": return Math.pow(rating, 2);//higher rating = higher weighting
-            case "lower": return Math.pow(11-rating, 2);//lower rating = higher weighting
-            case "unweighted": return 1.00;
-            default: return 1.0;
+            case "higher":
+                return Math.pow(rating, 2);//higher rating = higher weighting
+            case "lower":
+                return Math.pow(11 - rating, 2);//lower rating = higher weighting
+            case "unweighted":
+                return 1.00;
+            default:
+                return 1.0;
         }
     }
 }

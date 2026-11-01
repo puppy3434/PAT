@@ -5,13 +5,13 @@
 package sebastianbouwer.backend;
 
 /**
- *
+ *doesnt do anything yet
  * @author user
  */
-public class Admin extends Account{
-    
+public class Admin extends Account {
+
     public Admin(String sUI, String sU, String sP, String sJD, boolean sIA) {
         super(sUI, sU, sP, sJD, true);
     }
-    
+
 }

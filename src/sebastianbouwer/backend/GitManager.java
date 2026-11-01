@@ -8,11 +8,11 @@ package sebastianbouwer.backend;
  *
  * @author user
  */
-
 import java.io.*;
 import sebastianbouwer.backend.*;
 
 public class GitManager {
+
     private String runCommand(String... command) {
         try {
             ProcessBuilder pb = new ProcessBuilder(command);
@@ -27,13 +27,12 @@ public class GitManager {
             }
             process.waitFor();
             return output.toString();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("error running git " + e.getMessage());
         }
         return "";
     }
-    
+
     public boolean pullChanges() {
         System.out.println("Pulling");
         String result = runCommand("git", "pull", "origin", "main");
@@ -41,7 +40,7 @@ public class GitManager {
         return !result.contains("CONFLICT") && !result.contains("error")
                 && !result.contains("fatal");
     }
-    
+
     public boolean pushChanges(String commitMessage) {
         pullChanges();
         System.out.println("Pushing");
@@ -59,11 +58,10 @@ public class GitManager {
         }
         return !pushResult.contains("error") && !pushResult.contains("rejected") && !pushResult.contains("fatal");
     }
-    
+
     public boolean isGitInit() {
         String result = runCommand("git", "status");
         return !result.contains("not a git repository");
     }
 //no more test mm needed
 }
-

@@ -9,16 +9,17 @@ package sebastianbouwer.backend;
  * @author user
  */
 public class episode {
+
     private int episodeNum, seasonNum, anilistID;
     private String title, thumbnail, description;
-    
+
     public episode(int iAID, int iEN, int iSN, String sT, String sTN, String sD) {
         anilistID = iAID;
         episodeNum = iEN;
         seasonNum = iSN;
         title = sT;
         thumbnail = sTN;
-        description = sD;  
+        description = sD;
     }
 
     public int getEpisodeNum() {
@@ -40,7 +41,7 @@ public class episode {
     public String getDescription() {
         return description;
     }
-    
+
     public int getAnilistID() {
         return anilistID;
     }

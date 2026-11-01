@@ -9,10 +9,12 @@ package sebastianbouwer.backend;
  * @author user
  */
 import java.time.LocalDate;
+
 public class QueueItem {
+
     private String userID, lastLogDate, status;
     private int anilistID, currentEpisode, episodesWatchedToday;
-    
+
     public QueueItem(String sUID, int iAID) {
         userID = sUID;
         anilistID = iAID;
@@ -45,7 +47,7 @@ public class QueueItem {
     public int getEpisodesWatchedToday() {
         return episodesWatchedToday;
     }
-    
+
     public void setLastLogDate(String lastLogDate) {
         this.lastLogDate = lastLogDate;
     }
@@ -61,5 +63,5 @@ public class QueueItem {
     public void setEpisodesWatchedToday(int episodesWatchedToday) {
         this.episodesWatchedToday = episodesWatchedToday;
     }
-    
+
 }
