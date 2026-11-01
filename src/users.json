@@ -1,0 +1,24 @@
+[
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "username": "Test",
+    "password": "Password",
+    "joinDate": "2026-10-30",
+    "isAdmin": true,
+    "notifications": false,
+    "maxCacheSize": 0
+  },
+  {
+    "userID": "6131386e-1c80-4049-b14a-ed78c8f9bb98",
+    "username": "Pineapple",
+    "password": "Drummer494",
+    "joinDate": "2026-10-31",
+    "isAdmin": false,
+    "theme": "Dark",
+    "reminderTime": "20:00",
+    "localSavePath": "",
+    "onlineSavePath": "",
+    "notifications": true,
+    "maxCacheSize": 200
+  }
+]
