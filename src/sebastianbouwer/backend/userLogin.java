@@ -30,8 +30,7 @@ public class userLogin {
         String theme = "Dark", reminderTime = "20:00", localSavePath = "", onlineSavePath = ""; 
         int maxCacheSize = 200; //Mb
         boolean notifications = true;
-        Account newAcc = new Account(newID, username, password, joinDate, false, 
-            theme, reminderTime, localSavePath, onlineSavePath, notifications, maxCacheSize);
+        Account newAcc = new Account(newID, username, password, joinDate, false);
         manager.addAcc(newAcc);
         return true;//say yes i will make this account
     }

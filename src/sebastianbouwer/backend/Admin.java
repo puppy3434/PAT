@@ -10,9 +10,8 @@ package sebastianbouwer.backend;
  */
 public class Admin extends Account{
     
-    public Admin(String sUI, String sU, String sP, String sJD, boolean sIA, 
-            /*settings*/ String sT, String sRT, String sLSP, String sOSP, boolean bN, int iMCS) {
-        super(sUI, sU, sP, sJD, true, sT, sRT, sLSP, sOSP, bN, iMCS);
+    public Admin(String sUI, String sU, String sP, String sJD, boolean sIA) {
+        super(sUI, sU, sP, sJD, true);
     }
     
 }
