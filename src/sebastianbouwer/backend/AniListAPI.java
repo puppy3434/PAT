@@ -115,20 +115,17 @@ public List<show> fetch(String search, Integer anilistID, Integer malID, String 
                             String relType = edge.get("relationType").getAsString();
                             JsonObject node = edge.getAsJsonObject("node");
                             
-                            // 1. Ensure it's an Anime (not a Manga adaptation)
                             if (!node.has("type") || !node.get("type").getAsString().equals("ANIME")) {
                                 continue; 
                             }
 
                             show related = parseShowObject(node);
                             
-                            // 2. Filter out MUSIC videos and SPECIALS
                             String format = related.getFormat();
-                            if (format.equals("MUSIC")) {
+                            if (format.equals("MUSIC") || format.equals("SPECIAL")) {
                                 continue;
                             }
                             
-                            // 3. Add to the Map
                             if (!relatedMap.containsKey(relType)) {
                                 relatedMap.put(relType, new ArrayList<>());
                             }
@@ -289,10 +286,24 @@ public List<show> fetch(String search, Integer anilistID, Integer malID, String 
                 ? media.get("format").getAsString() : "UNKNOWN";
         String statusStr = media.has("status") && !media.get("status").isJsonNull() 
                 ? media.get("status").getAsString() : "UNKNOWN";
-
+        int releaseYear = 0;
+        if (media.has("startDate") && !media.get("startDate").isJsonNull()) {
+            JsonObject startDate = media.getAsJsonObject("startDate");
+            if (startDate.has("year") && !startDate.get("year").isJsonNull()) {
+                releaseYear = startDate.get("year").getAsInt();
+            }
+        }
+        if (media.has("startDate") && !media.get("startDate").isJsonNull()) {
+            JsonObject startDate = media.getAsJsonObject("startDate");
+            if (startDate.has("year") && !startDate.get("year").isJsonNull()) {
+                releaseYear = startDate.get("year").getAsInt();
+            }
+        }
+        // If release year is 0 (unknown), push it to the end so it doesn't break chronological order
+        if (releaseYear == 0) releaseYear = 9999; 
 
         return new show(id, malId, engTitle, forTitle, desc, pic, eps, null,
-                rating, new ArrayList<>(), formatStr, statusStr, "API");
+                rating, new ArrayList<>(), formatStr, statusStr, "API", releaseYear);
     }
 
     private String sendGraphQLRequest(String query, JsonObject variables) {
@@ -345,42 +356,40 @@ public List<show> fetch(String search, Integer anilistID, Integer malID, String 
     }
     
     public show getRandomAnime() {
-        int maxID = 200000; //placeholder
-        String maxIDQuery = "query {Page(page: 1, perPage: 1) {media(sort: ID_DESC){ id })}}";
-        String maxIDResponse = sendGraphQLRequest(maxIDQuery, new JsonObject());
-        if (maxIDResponse != null) {
+        // AniList has tens of thousands of anime. We pick a random page.
+        // The total count is large, so 20000 is a very safe upper bound.
+        java.util.Random rand = new java.util.Random();
+        int randomPage = rand.nextInt(5000) + 1; // Generates a number between 1 and 20000
+
+        // Query for 1 anime on that specific page
+        String query = "query ($page: Int) { " +
+                       "  Page(page: $page, perPage: 1) { " +
+                       "    media(type: ANIME) { " +
+                       "      id idMal title { english romaji } description coverImage { large } " +
+                       "      episodes averageScore genres format status startDate { year } " +
+                       "    } " +
+                       "  } " +
+                       "}";
+
+        JsonObject variables = new JsonObject();
+        variables.addProperty("page", randomPage);
+
+        String responseBody = sendGraphQLRequest(query, variables);
+
+        if (responseBody != null) {
             try {
-                JsonObject json = JsonParser.parseString(maxIDResponse).getAsJsonObject();
-                maxID = json.getAsJsonObject("data").getAsJsonObject("Page").getAsJsonArray("media").get(0)
-                        .getAsJsonObject().get("id").getAsInt();
-            }
-            catch (Exception e) {
-                System.out.println("error rolling " + e.getMessage());
-            }
-            
-            java.util.Random random = new java.util.Random();
-            for (int attempts = 0; attempts < 50; attempts++) {//limits attempts to 50 for rate limiting
-                int randomID = random.nextInt(maxID)+1;
-                String query = "query ($id: Int) {Media(id: $id) {"
-                        + "id idMal title { english romaji } description coverImage"
-                        + "{ Large } episodes averageScore genres format status type } }";
-                JsonObject variables = new JsonObject();
-                variables.addProperty("id", randomID);
-                String response = sendGraphQLRequest(query, variables);
-                if (response != null) {
-                    try {
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        if (json.has("data") && !json.get("data").isJsonNull()) {
-                            JsonObject media = json.getAsJsonObject("data").getAsJsonObject("Media");
-                            if (media.has("type") && media.get("type").getAsString().equals("ANIME")) {//checks that its actually an anime
-                                return parseShowObject(media);
-                            }
-                        }
-                    }
-                    catch (Exception e) {
-                        System.out.println("error random " + e.getMessage());
+                JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
+                if (json.has("data") && !json.get("data").isJsonNull()) {
+                    JsonArray mediaArray = json.getAsJsonObject("data")
+                                                 .getAsJsonObject("Page")
+                                                 .getAsJsonArray("media");
+                    
+                    if (mediaArray.size() > 0) {
+                        return parseShowObject(mediaArray.get(0).getAsJsonObject());
                     }
                 }
+            } catch (Exception e) {
+                System.out.println("Error getting random anime: " + e.getMessage());
             }
         }
         return null;

@@ -27,6 +27,8 @@ public class ShowManager {
       gson = new GsonBuilder().setPrettyPrinting().create();
       shows = new ArrayList<>();
       episodeCache = new ArrayList<>();
+      readShow();
+      readEpisodes();
     }
     
     private void readShow() {
@@ -42,11 +44,11 @@ public class ShowManager {
                 write.write("[]");
                 System.out.println("shows.json was missing so i made another one");
             }
-            catch(IOException d) {
+            catch(Exception d) {
                 System.out.println("error idk " + d.getMessage());
             }
         }
-        catch(IOException e) {//reader wants an IOException for some reason and i dont want to throw it
+        catch(Exception e) {//reader wants an IOException for some reason and i dont want to throw it
             System.out.println("completele failure (to read) " + e.getMessage());
         } 
     }
@@ -68,9 +70,9 @@ public class ShowManager {
     public boolean showExists(int aniListID, int malID, String engName, String forName) {
         for (int i = 0; i < shows.size(); i++) {
             if (shows.get(i).getAnilistID() == aniListID
-                    || shows.get(i).getMalID() == malID
-                    || shows.get(i).getEngTitle().equalsIgnoreCase(engName)
-                    || shows.get(i).getForTitle().equalsIgnoreCase(forName)) {
+                    || (shows.get(i).getMalID() == malID && malID != 0)
+                    || shows.get(i).getEngTitle().equalsIgnoreCase(engName) && engName != null
+                    || shows.get(i).getForTitle().equalsIgnoreCase(forName) && forName != null) {
                 return true;
             }
         }
@@ -116,10 +118,7 @@ public class ShowManager {
     public List<episode> getCachedShowEps(int aniListID, int malID, String engName, String forName) {
         List<episode> arrEpisodes = new ArrayList<>();
         for (int i = 0; i < episodeCache.size(); i++) {
-            if (shows.get(i).getAnilistID() == aniListID
-                    || shows.get(i).getMalID() == malID
-                    || shows.get(i).getEngTitle().equalsIgnoreCase(engName)
-                    || shows.get(i).getForTitle().equalsIgnoreCase(forName)) {
+            if (episodeCache.get(i).getAnilistID() == aniListID) {
                 arrEpisodes.add(episodeCache.get(i));
             }
         }
@@ -128,13 +127,24 @@ public class ShowManager {
     
     public boolean hasCache(int aniListID, int malID, String engName, String forName) {
         for (int i = 0; i < episodeCache.size(); i++) {
-            if (shows.get(i).getAnilistID() == aniListID
-                    || shows.get(i).getMalID() == malID
-                    || shows.get(i).getEngTitle().equalsIgnoreCase(engName)//if null maybe crash idk
-                    || shows.get(i).getForTitle().equalsIgnoreCase(forName)) {
+            if (episodeCache.get(i).getAnilistID() == aniListID) {
                 return true;
             }
         }
         return false;
+    }
+    
+    public List<show> getAllShows() {
+        return shows;
+    }
+    
+    public void removeShow(int anilistID) {
+        for (int i = 0; i < shows.size(); i++) {
+            if (shows.get(i).getAnilistID() == anilistID) {
+                shows.remove(i);
+                saveShow();
+                return;
+            }
+        }
     }
 }

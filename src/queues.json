@@ -1,0 +1,398 @@
+{
+  "user1": [
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "watching",
+      "anilistID": 1535,
+      "currentEpisode": 35,
+      "episodesWatchedToday": 35
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 101921,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 30,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21355,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 108632,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 140960,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 20958,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 16498,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 20605,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 182255,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 154587,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 142329,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 145139,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 189513,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 155783,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 186540,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 105143,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "user1",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 11757,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    }
+  ],
+  "6e91981b-be4e-42d3-b252-f68ed19bc513": [
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "watching",
+      "anilistID": 20958,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 99147,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 16498,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 108632,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21355,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 11771,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21507,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 9253,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 101759,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 182255,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 154587,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 145139,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 142329,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 101991,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21202,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 11061,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 11757,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21459,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21856,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 2001,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 21127,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 101922,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 112151,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 20665,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 269,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 116674,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 101921,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 1535,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 20605,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    },
+    {
+      "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+      "lastLogDate": "2026-11-01",
+      "status": "pending",
+      "anilistID": 13601,
+      "currentEpisode": 0,
+      "episodesWatchedToday": 0
+    }
+  ]
+}

@@ -4,8 +4,6 @@
  */
 package sebastianbouwer;
 
-import sebastianbouwer.panels.profile.AdminPanel;
-import sebastianbouwer.panels.profile.SettingsPanel;
 import java.awt.CardLayout;
 import sebastianbouwer.backend.Account;
 import sebastianbouwer.panels.*;
@@ -17,41 +15,43 @@ import sebastianbouwer.panels.*;
 public class shell extends javax.swing.JFrame {
     boolean isAdmin = false;
     public Account user;
+    private javax.swing.JPanel cardContainer;
+    
+    
     /**
      * Creates new form shell
      */
     public shell(Account account, boolean isAdmin) {
         initComponents();
-        this.isAdmin = isAdmin;
-        adminB.setVisible(isAdmin);
+        isAdmin = isAdmin;
         user = account;
         
-        CardLayout cl = new CardLayout();
-        contentP.setLayout(cl);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); 
+        setLocationRelativeTo(null);
         
-        DashboardPanel dashboard = new DashboardPanel(this.user);
-        ShowListPanel showlist = new ShowListPanel(this.user);
-        BigListPanel biglist = new BigListPanel(this.user);
-        QueuePanel queue = new QueuePanel(this.user);
-        HomePanel home = new HomePanel(this.user);
-        HistoryPanel history = new HistoryPanel(this.user);
-        RollPanel roll = new RollPanel(this.user);
-        SearchAddPanel searchadd = new SearchAddPanel(this.user);
+        contentP.setLayout(new java.awt.GridBagLayout());
         
-        SettingsPanel settings = new SettingsPanel(this.user);
-        AdminPanel admin = new AdminPanel(this.user);
+        cardContainer = new javax.swing.JPanel();
+        contentP.setLayout(new java.awt.BorderLayout());
+        cardContainer.setLayout(new java.awt.CardLayout());
         
-        contentP.add(dashboard, "Dashboard");
-        contentP.add(showlist, "Show List");
-        contentP.add(biglist, "Big List");
-        contentP.add(queue, "Queue");
-        contentP.add(home, "Home");
-        contentP.add(history, "History");
-        contentP.add(roll, "Roll");
-        contentP.add(searchadd, "Search and Add");
-        contentP.add(admin, "Admin");
-        contentP.add(settings, "Settings");
-        cl.show(contentP, "Home");
+        contentP.add(cardContainer);
+        
+        DashboardPanel dashboard = new DashboardPanel(user);
+        ShowListPanel showlist = new ShowListPanel(user);
+        QueuePanel queue = new QueuePanel(user);
+        RollPanel roll = new RollPanel(user);
+        SearchAddPanel searchadd = new SearchAddPanel(user);
+        
+        cardContainer.add(dashboard, "Dashboard");
+        cardContainer.add(showlist, "Show List");
+        cardContainer.add(queue, "Queue");
+        cardContainer.add(roll, "Roll");
+        cardContainer.add(searchadd, "Search and Add");
+        
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Dashboard");
+        
     }
 
     /**
@@ -64,34 +64,27 @@ public class shell extends javax.swing.JFrame {
     private void initComponents() {
 
         headerP = new javax.swing.JPanel();
-        profileB = new javax.swing.JButton();
-        adminB = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        syncB = new javax.swing.JButton();
         sidebarP = new javax.swing.JPanel();
-        homeB = new javax.swing.JButton();
         dashboardB = new javax.swing.JButton();
         queueB = new javax.swing.JButton();
         rollB = new javax.swing.JButton();
         searchaddB = new javax.swing.JButton();
         showlistB = new javax.swing.JButton();
-        biglistB = new javax.swing.JButton();
-        historyB = new javax.swing.JButton();
         contentP = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         headerP.setBackground(new java.awt.Color(102, 102, 255));
 
-        profileB.setText("Profile");
-        profileB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profileBActionPerformed(evt);
-            }
-        });
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Anime Media Challenge");
 
-        adminB.setText("Admin");
-        adminB.addActionListener(new java.awt.event.ActionListener() {
+        syncB.setText("Sync to GitHub");
+        syncB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminBActionPerformed(evt);
+                syncBActionPerformed(evt);
             }
         });
 
@@ -100,30 +93,23 @@ public class shell extends javax.swing.JFrame {
         headerPLayout.setHorizontalGroup(
             headerPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPLayout.createSequentialGroup()
-                .addContainerGap(514, Short.MAX_VALUE)
-                .addComponent(profileB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adminB)
-                .addGap(37, 37, 37))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(syncB)
+                .addGap(102, 102, 102))
         );
         headerPLayout.setVerticalGroup(
             headerPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(headerPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(profileB)
-                    .addComponent(adminB))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(syncB))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         sidebarP.setBackground(new java.awt.Color(153, 255, 153));
-
-        homeB.setText("Home");
-        homeB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeBActionPerformed(evt);
-            }
-        });
 
         dashboardB.setText("Dashboard");
         dashboardB.addActionListener(new java.awt.event.ActionListener() {
@@ -160,20 +146,6 @@ public class shell extends javax.swing.JFrame {
             }
         });
 
-        biglistB.setText("Big List");
-        biglistB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                biglistBActionPerformed(evt);
-            }
-        });
-
-        historyB.setText("History");
-        historyB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                historyBActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout sidebarPLayout = new javax.swing.GroupLayout(sidebarP);
         sidebarP.setLayout(sidebarPLayout);
         sidebarPLayout.setHorizontalGroup(
@@ -187,18 +159,13 @@ public class shell extends javax.swing.JFrame {
                         .addComponent(searchaddB))
                     .addComponent(queueB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dashboardB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(showlistB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(historyB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(biglistB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(showlistB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidebarPLayout.setVerticalGroup(
             sidebarPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebarPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(homeB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dashboardB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(queueB)
@@ -208,14 +175,10 @@ public class shell extends javax.swing.JFrame {
                 .addComponent(searchaddB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showlistB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(biglistB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(historyB)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
-        contentP.setBackground(new java.awt.Color(102, 102, 0));
+        contentP.setBackground(new java.awt.Color(51, 51, 51));
         contentP.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,7 +188,7 @@ public class shell extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sidebarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contentP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentP, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE))
             .addComponent(headerP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -241,65 +204,72 @@ public class shell extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void profileBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Settings");
-    }//GEN-LAST:event_profileBActionPerformed
-
     private void dashboardBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Dashboard");
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Dashboard");
     }//GEN-LAST:event_dashboardBActionPerformed
 
     private void rollBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Roll");
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Roll");
     }//GEN-LAST:event_rollBActionPerformed
 
     private void showlistBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showlistBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Show List");
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Show List");
     }//GEN-LAST:event_showlistBActionPerformed
-
-    private void historyBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyBActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "History");
-    }//GEN-LAST:event_historyBActionPerformed
-
-    private void homeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Home");
-    }//GEN-LAST:event_homeBActionPerformed
 
     private void queueBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queueBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Queue");
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Queue");
     }//GEN-LAST:event_queueBActionPerformed
 
     private void searchaddBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchaddBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Search and Add");
+        java.awt.CardLayout cl = (java.awt.CardLayout) cardContainer.getLayout();
+        cl.show(cardContainer, "Search and Add");
     }//GEN-LAST:event_searchaddBActionPerformed
 
-    private void adminBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBActionPerformed
+    private void syncBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_syncBActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Admin");
-    }//GEN-LAST:event_adminBActionPerformed
-
-    private void biglistBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biglistBActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout) contentP.getLayout();
-        cl.show(contentP, "Big List");
-    }//GEN-LAST:event_biglistBActionPerformed
+        syncB.setText("Syncing...");
+        syncB.setEnabled(false);
+        
+        // Run in a background thread so the UI doesn't freeze while Git runs
+        new Thread(() -> {
+            try {
+                sebastianbouwer.backend.GitManager git = new sebastianbouwer.backend.GitManager();
+                
+                // 1. Push local changes to GitHub
+                boolean pushed = git.pushChanges("Auto-sync from app: " + user.getUsername());
+                
+                // 2. Pull any changes from others
+                boolean pulled = git.pullChanges();
+                
+                // 3. Update UI when done
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                    if (pushed && pulled) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Sync successful! Data is up to date.");
+                    } else {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Sync partially failed. Check console for details.");
+                    }
+                    syncB.setText("Sync to GitHub");
+                    syncB.setEnabled(true);
+                });
+                
+            } catch (Exception e) {
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Sync error: " + e.getMessage());
+                    syncB.setText("Sync to GitHub");
+                    syncB.setEnabled(true);
+                });
+            }
+        }).start();
+    }//GEN-LAST:event_syncBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,18 +277,15 @@ public class shell extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminB;
-    private javax.swing.JButton biglistB;
     private javax.swing.JPanel contentP;
     private javax.swing.JButton dashboardB;
     private javax.swing.JPanel headerP;
-    private javax.swing.JButton historyB;
-    private javax.swing.JButton homeB;
-    private javax.swing.JButton profileB;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton queueB;
     private javax.swing.JButton rollB;
     private javax.swing.JButton searchaddB;
     private javax.swing.JButton showlistB;
     private javax.swing.JPanel sidebarP;
+    private javax.swing.JButton syncB;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,6 +16,8 @@ private boolean show = true;
     public login() {
         initComponents();
         errorL.setVisible(false);
+        setSize(500, 500);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,7 +41,7 @@ private boolean show = true;
         signupRedirectB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(547, 379));
+        setSize(new java.awt.Dimension(500, 500));
 
         usernameF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +136,7 @@ private boolean show = true;
                 .addComponent(errorL)
                 .addGap(18, 18, 18)
                 .addComponent(signupRedirectB)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();

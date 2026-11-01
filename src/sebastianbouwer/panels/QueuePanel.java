@@ -8,15 +8,74 @@ package sebastianbouwer.panels;
  *
  * @author user
  */
+
+import sebastianbouwer.backend.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 public class QueuePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form QueuePanel
      */
-    private sebastianbouwer.backend.Account currentUser;
-    public QueuePanel(sebastianbouwer.backend.Account user) {
+    private QueueManager qM;
+    private ShowManager sM;
+    private Account currentUser;
+    public QueuePanel(Account user) {
         initComponents();
         currentUser = user;
+        refreshQueue();
+        
+    }
+    
+    public void refreshQueue() {
+        qM = new QueueManager();
+        sM = new ShowManager();
+        List<QueueItem> userQueue = qM.getUserQueue(currentUser.getUserID());
+        String[] columns = {"AniList ID", "Title", "Episodes Watched", "Total Episodes", "Status"};
+        Object[][] data = new Object[userQueue.size()][5];
+        int watchingRowIndex = -1;
+        for (int i = 0; i < userQueue.size(); i++) {
+            QueueItem item = userQueue.get(i);
+            data[i][0] = item.getAnilistID();
+            data[i][1] = getShowTitle(item.getAnilistID());
+            data[i][2] = item.getCurrentEpisode();
+            data[i][3] = getShowTotalEp(item.getAnilistID());
+            data[i][4] = item.getStatus();
+                
+            if (item.getStatus().equals("watching")) {
+                watchingRowIndex = i;
+            }
+        }
+        queueTable.setModel(new DefaultTableModel(data, columns) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        
+        if (watchingRowIndex != -1) {
+            queueTable.setRowSelectionInterval(watchingRowIndex, watchingRowIndex);
+        }
+    }
+    
+    private String getShowTitle(int anilistID) {
+        List<show> all = sM.getAllShows();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getAnilistID() == anilistID) {
+                return all.get(i).getEngTitle();
+            }
+        }
+        return "unknown show";
+    }
+    
+    private int getShowTotalEp(int anilistID) {
+        List<show> all = sM.getAllShows();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getAnilistID() == anilistID) {
+                return all.get(i).getTotalEpisodes();
+            }
+        }
+        return 0;
     }
 
     /**
@@ -28,30 +87,151 @@ public class QueuePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        titleL = new javax.swing.JLabel();
+        refreshB = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        queueTable = new javax.swing.JTable();
+        logL = new javax.swing.JLabel();
+        episodesF = new javax.swing.JTextField();
+        logB = new javax.swing.JButton();
 
-        jLabel1.setText("queue panel goes here");
+        titleL.setText("My Queue");
+
+        refreshB.setText("Refresh Queue");
+        refreshB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBActionPerformed(evt);
+            }
+        });
+
+        scrollPane.setPreferredSize(new java.awt.Dimension(600, 400));
+
+        queueTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Anilist ID", "Title", "Episodes Watched", "Total Episodes", "Status"
+            }
+        ));
+        queueTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        queueTable.setRowHeight(25);
+        scrollPane.setViewportView(queueTable);
+
+        logL.setText("Episodes watched today:");
+
+        episodesF.setMinimumSize(new java.awt.Dimension(99, 23));
+        episodesF.setPreferredSize(new java.awt.Dimension(99, 23));
+        episodesF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                episodesFActionPerformed(evt);
+            }
+        });
+
+        logB.setText("Log Episodes");
+        logB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(titleL, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(logL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(episodesF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleL, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logL)
+                    .addComponent(episodesF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void episodesFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_episodesFActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_episodesFActionPerformed
+
+    private void logBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logBActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = queueTable.getSelectedRow();
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a show");
+            return;
+        }
+        String epText = episodesF.getText();
+        if (epText.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a number (negative converts to positive)");
+            return;
+        }
+        String status = (String) queueTable.getValueAt(selectedRow, 4);
+        if (!status.equals("watching")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "You can only log progress for the show you are watching");
+            return;
+        }
+        if (epText.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a number of episodes watched");
+            return;
+        }
+        try {
+            int epsWatched = Math.abs(Integer.parseInt(epText));
+            if (epsWatched == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Enter a number other than 0");
+                return;
+            }
+            
+            int anilistID = (int) queueTable.getValueAt(selectedRow, 0);
+            int watched = (int) queueTable.getValueAt(selectedRow, 3);
+            qM.logProgress(currentUser.getUserID(), anilistID, epsWatched, watched);
+            episodesF.setText("");
+            refreshQueue();
+        }
+        catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a valid number");
+        }
+    }//GEN-LAST:event_logBActionPerformed
+
+    private void refreshBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBActionPerformed
+        // TODO add your handling code here:
+        refreshQueue();
+    }//GEN-LAST:event_refreshBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField episodesF;
+    private javax.swing.JButton logB;
+    private javax.swing.JLabel logL;
+    private javax.swing.JTable queueTable;
+    private javax.swing.JButton refreshB;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JLabel titleL;
     // End of variables declaration//GEN-END:variables
 }

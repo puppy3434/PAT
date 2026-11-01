@@ -28,19 +28,25 @@ public class RollManager {
         readHistory();
     }
     
-    public List<show> roll(String targetUserID, int batchCount, String mode, boolean isRandomRoll,
+    public List<RollResult> roll(String targetUserID, int batchCount, String mode, boolean isRandomRoll,
             List<show> masterList, QueueManager qM, AniListAPI api) {
-        List<show> rolled = new ArrayList<>();
+        List<RollResult> rolled = new ArrayList<>();
         int batch = Math.abs(batchCount);//how limit min/max; abs ensures no negative i think
             if (isRandomRoll) {
                 for (int i = 0; i < batch; i++) {
                     show random = api.getRandomAnime();
                     if (random != null){
-                        qM.addToQueue(targetUserID, random.getAnilistID());
+                        List<show> franchise = addFranchiseToQueue(random, masterList, api, targetUserID, qM);
+                        rolled.add(new RollResult(random, franchise));
                         addHistoryRecord(new RollRecord(targetUserID, random.getAnilistID(), random.getEngTitle(),
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
                                 "Random"));
-                        rolled.add(random);
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+                        
                     }
                 }
                 return rolled;
@@ -72,9 +78,10 @@ public class RollManager {
                     show show = pool.get(k);
                     currentWeight += weight(show, mode);
                     if (currentWeight > random) {
-                        rolled.add(show);
                         pool.remove(k);//no duplicate in batch because we steal this away from batch
-                        qM.addToQueue(targetUserID, show.getAnilistID());
+                        List<show> franchise = addFranchiseToQueue(show, masterList, api, targetUserID, 
+                                qM);
+                        rolled.add(new RollResult(show, franchise));
                         addHistoryRecord(new RollRecord(targetUserID, show.getAnilistID(), show.getEngTitle(),
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
                                 "Master List"));
@@ -83,6 +90,58 @@ public class RollManager {
             }
         }
             return rolled;
+    }
+    
+    private List<show> addFranchiseToQueue(show base, List<show> masterList, AniListAPI api, 
+            String userID, QueueManager qM){
+        List<show> franchise = new ArrayList<>();
+        franchise.add(base); // Add the rolled show first
+        java.util.Map<String, List<show>> relations = api.getRelatedShows(base.getAnilistID());
+        String[] valid = {"SEQUEL", "PREQUEL", "SIDE_STORY", "SPIN_OFF", "PARENT"};
+        for (int i = 0; i < valid.length; i++) {
+            String type = valid[i];
+            if (relations.containsKey(type)) {
+                List<show> shows = relations.get(type);
+                for (int k = 0; k < shows.size(); k++) {
+                    show relatedShow = shows.get(k);
+                    for (int j = 0; j < masterList.size(); j++) {
+                        if (masterList.get(j).getAnilistID() == relatedShow.getAnilistID()) {
+                            boolean alreadyInList = false;
+                            for (int f = 0; f < franchise.size(); f++) {
+                                if (franchise.get(f).getAnilistID() == relatedShow.getAnilistID()) {
+                                    alreadyInList = true;
+                                    break;
+                                }
+                            }
+                            
+                            if (!alreadyInList) {
+                                franchise.add(relatedShow);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < franchise.size() - 1; i++) {
+            for (int k = 0; k < franchise.size() - i - 1; k++) {
+                if (franchise.get(k).getReleaseYear() > franchise.get(k + 1).getReleaseYear()) {
+                    show temp = franchise.get(k);
+                    franchise.set(k, franchise.get(k + 1));
+                    franchise.set(k + 1, temp);
+                }
+            }
+        }
+        for (int i = 0; i < franchise.size(); i++) {
+            show fShow = franchise.get(i);
+            qM.addToQueue(userID, fShow.getAnilistID());
+            if (fShow.getAnilistID() != base.getAnilistID()) {
+                addHistoryRecord(new RollRecord(userID, fShow.getAnilistID(), fShow.getEngTitle(),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()),
+                        "Franchise Chain"));
+            }
+        }
+        return franchise;
     }
     
     private void readHistory() {
@@ -94,6 +153,13 @@ public class RollManager {
         }
         catch (FileNotFoundException e) {
             System.out.println("creating writer " + e.getMessage());
+            try (Writer write = new FileWriter(historyFilePath)) {
+                write.write("[]");
+                System.out.println("Made roll_history.json");
+            }
+            catch (IOException er) {
+                System.out.println("could not make history " + er.getMessage());
+            }
         }
         catch(IOException e) {
             System.out.println("couldnt read history " + e.getMessage());
@@ -120,7 +186,7 @@ public class RollManager {
         return history;
     }
     
-    public class RollRecord {//cool nested class ngl
+    public static class RollRecord {//cool nested class ngl
         private String userID, engTitle, dateRolled, rollType;
         private int anilistID;
         
@@ -148,6 +214,16 @@ public class RollManager {
             return rollType;
         }
         
+    }
+    
+    public static class RollResult {
+        public show baseShow;
+        public List<show> franchiseShows;
+        
+        public RollResult(show base, List<show> franchise) {
+            baseShow = base;
+            franchiseShows = franchise;
+        }
     }
     
     public double weight(show show, String mode) {

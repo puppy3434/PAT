@@ -45,19 +45,25 @@ public class GitManager {
     public boolean pushChanges(String commitMessage) {
         pullChanges();
         System.out.println("Pushing");
-        runCommand("git", "add", "src/*.json");
+        runCommand("git", "add", "src/");
         String commitResult = runCommand("git", "commit", "-m", commitMessage);
-        if (commitResult.contains("nothing to commit") || commitResult.contains("working tree clean")) {
+        if (commitResult.contains("nothing to commit") || commitResult.contains("working tree clean")
+                || commitResult.contains("No local changes to push")) {
             System.out.println("no local changes to push");
             return true;
         }
         String pushResult = runCommand("git", "push", "origin", "main");
         System.out.println(pushResult);
-        return !!pushResult.contains("error") && !pushResult.contains("rejected") && !pushResult.contains("fatal");
+        if (pushResult.contains("Everything up-to-date")) {
+            return true;
+        }
+        return !pushResult.contains("error") && !pushResult.contains("rejected") && !pushResult.contains("fatal");
     }
     
     public boolean isGitInit() {
         String result = runCommand("git", "status");
         return !result.contains("not a git repository");
     }
+//no more test mm needed
 }
+

@@ -8,15 +8,96 @@ package sebastianbouwer.panels;
  *
  * @author user
  */
+import sebastianbouwer.backend.*;
+import java.awt.Color;
+import java.util.List;
 public class DashboardPanel extends javax.swing.JPanel {
-
     /**
      * Creates new form DashboardPanel
      */
-    private sebastianbouwer.backend.Account currentUser;
-    public DashboardPanel(sebastianbouwer.backend.Account user) {
+    private StrikerManager strikeM;
+    private QueueManager qM;
+    private ShowManager sM;
+    private Account currentUser;
+    public DashboardPanel(Account user) {
         initComponents();
         currentUser = user;
+        strikeM = new StrikerManager();     
+        refreshDashboard();
+    }
+    
+    public void refreshDashboard() {
+        qM = new QueueManager();
+        sM = new ShowManager();
+        welcomeL.setText("Welcome back " + currentUser.getUsername() + "!");
+        int strikes = strikeM.getActiveStrikeCount(currentUser.getUserID());
+        strikeL.setForeground(Color.green);
+                
+                if (strikes == 0) {
+                    strikeL.setForeground(Color.green);
+                }
+                else if (strikes <= 2) {
+                    strikeL.setForeground(Color.orange);
+                }
+                else {
+                    strikeL.setForeground(Color.red);
+                }
+                
+                List<QueueItem> userQueue = qM.getUserQueue(currentUser.getUserID());
+                String today = java.time.LocalDate.now().toString();
+                boolean loggedToday = false;
+                boolean watchingShow = false;
+                StringBuilder queuePreview = new StringBuilder();
+                int count = 0;
+                for (int i = 0; i < userQueue.size(); i++) {
+                    QueueItem item = userQueue.get(i);
+                    if (item.getStatus().equals("watching")) {
+                        watchingShow = true;
+                        if (item.getLastLogDate().equals(today)) {
+                            loggedToday = true;
+                        }
+                    }
+                    if (!item.getStatus().equals("complete") && count < 4) {
+                        String title = getShowTitle(item.getAnilistID());
+                        queuePreview.append("- ").append(title).append(" (").append(item.getStatus()).append(")\n");
+                        count++;
+                    }
+                }
+                    
+                    
+                    if (userQueue.isEmpty()) {
+                        statusL.setText("You have no active shows, roll for one");
+                        statusL.setForeground(Color.black);
+                    }
+                    else if (!watchingShow) {
+                        statusL.setText("You are not watching any shows, roll for one");
+                        statusL.setForeground(Color.black);
+                    }
+                    else if (loggedToday) {
+                        statusL.setText("Progress logged for today");
+                        statusL.setForeground(Color.green);
+                    }
+                    else {
+                        statusL.setText("WARNING: Nothing logged for today");
+                        statusL.setForeground(Color.red);
+                    }
+                    
+                    if (queuePreview.length() == 0) {
+                        queuePreviewArea.setText("Empty Queue");
+                    }
+                    else {
+                        queuePreviewArea.setText(queuePreview.toString());
+                    }
+    }
+    
+    private String getShowTitle(int anilistID) {
+            List<show> all = sM.getAllShows();
+            for (int i = 0; i < all.size(); i++) {
+                if (all.get(i).getAnilistID() == anilistID) {
+                    return all.get(i).getEngTitle();
+                }
+            }
+            return "Unkown Show";
     }
 
     /**
@@ -28,30 +109,107 @@ public class DashboardPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        welcomeL = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        queuePreviewArea = new javax.swing.JTextArea();
+        refreshDB = new javax.swing.JButton();
+        strikeL = new javax.swing.JLabel();
+        statusL = new javax.swing.JLabel();
 
-        jLabel1.setText("Dashboard panel goes here");
+        welcomeL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        welcomeL.setText("Welcome!");
+
+        jLabel1.setText("Punishments:");
+
+        jLabel2.setText("Today's Status:");
+
+        jLabel3.setText("Up next in your queue:");
+
+        queuePreviewArea.setColumns(20);
+        queuePreviewArea.setRows(5);
+        queuePreviewArea.setEditable(false);
+        jScrollPane1.setViewportView(queuePreviewArea);
+
+        refreshDB.setText("Refresh Dashboard");
+        refreshDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshDBActionPerformed(evt);
+            }
+        });
+
+        strikeL.setText("0");
+
+        statusL.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(welcomeL, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(refreshDB)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(statusL)
+                            .addComponent(strikeL))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(welcomeL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(strikeL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(statusL))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(refreshDB)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshDBActionPerformed
+        // TODO add your handling code here:
+        refreshDashboard();
+    }//GEN-LAST:event_refreshDBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea queuePreviewArea;
+    private javax.swing.JButton refreshDB;
+    private javax.swing.JLabel statusL;
+    private javax.swing.JLabel strikeL;
+    private javax.swing.JLabel welcomeL;
     // End of variables declaration//GEN-END:variables
 }

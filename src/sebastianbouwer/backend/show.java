@@ -10,7 +10,7 @@ package sebastianbouwer.backend;
  */
 import java.util.List;
 public class show {
-    private int anilistID, malID, totalEpisodes, seasons, epSeason;
+    private int anilistID, malID, totalEpisodes, seasons, epSeason, releaseYear;
     private String engTitle, forTitle/*foreign lang title*/, format/*TV, Movie, OVA etc*/, 
             description, picture/*url of image as a string*/, status, addedBy; //userid
     private List<String> genres;
@@ -18,7 +18,7 @@ public class show {
     private List<Integer> seasonEpisodes; //stores num episodes per season, size is season count
     
     public show (int iAID, int iMID, String sET, String sFT, String sD, String sP, int iTE, List<Integer> iSE, 
-            double dR, List<String> sG, String sF, String sS, String sAB) {
+            double dR, List<String> sG, String sF, String sS, String sAB, int rY) {
         
         anilistID = iAID;
         malID = iMID;
@@ -33,6 +33,7 @@ public class show {
         format = sF;
         addedBy = sAB;  
         status = sS;
+        releaseYear = rY;
     }
     
     public int getAnilistID() {
@@ -42,6 +43,9 @@ public class show {
         return malID;
     }
     public String getEngTitle() {
+        if (engTitle == null || engTitle.trim().isEmpty()) {
+            return forTitle;
+        }
         return engTitle;
     }
     public String getForTitle() {
@@ -73,5 +77,8 @@ public class show {
     }
     public String getStatus() {
         return status;
+    }
+    public int getReleaseYear() {
+        return releaseYear;
     }
 }

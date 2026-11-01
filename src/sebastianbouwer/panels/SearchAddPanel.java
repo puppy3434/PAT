@@ -8,15 +8,26 @@ package sebastianbouwer.panels;
  *
  * @author user
  */
+import sebastianbouwer.backend.*;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 public class SearchAddPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form SearchAddPanel
      */
-    private sebastianbouwer.backend.Account currentUser;
+    private AniListAPI api;
+    private ShowManager sM;
+    private QueueManager qM;
+    private Account currentUser;
+    private List<show> currentResults;
     public SearchAddPanel(sebastianbouwer.backend.Account user) {
         initComponents();
         currentUser = user;
+        api = new AniListAPI();
+        sM = new ShowManager();
+        qM = new QueueManager();
+        
     }
 
     /**
@@ -28,30 +39,176 @@ public class SearchAddPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        searchF = new javax.swing.JTextField();
+        searchB = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resultsTable = new javax.swing.JTable();
+        addMasterB = new javax.swing.JButton();
+        addQueueB = new javax.swing.JButton();
 
-        jLabel1.setText("Search and add panel goes here");
+        searchF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFActionPerformed(evt);
+            }
+        });
+
+        searchB.setText("Search");
+        searchB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBActionPerformed(evt);
+            }
+        });
+
+        resultsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "AniList ID", "Title", "Episodes"
+            }
+        ));
+        jScrollPane1.setViewportView(resultsTable);
+
+        addMasterB.setText("Add to Master List");
+        addMasterB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMasterBActionPerformed(evt);
+            }
+        });
+
+        addQueueB.setText("Add to my queue");
+        addQueueB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addQueueBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchF))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addMasterB)
+                        .addGap(29, 29, 29)
+                        .addComponent(addQueueB)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchF)
+                    .addComponent(searchB))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addMasterB)
+                    .addComponent(addQueueB))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFActionPerformed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_searchFActionPerformed
+
+    private void addMasterBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMasterBActionPerformed
+        // TODO add your handling code here:
+        int row = resultsTable.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a show from the table first.");
+            return;
+        }
+
+        show selectedShow = currentResults.get(row);
+
+        // Check if it already exists
+        if (sM.showExists(selectedShow.getAnilistID(), selectedShow.getMalID(), selectedShow.getEngTitle(), selectedShow.getForTitle())) {
+            javax.swing.JOptionPane.showMessageDialog(this, "This show is already in the Master List!");
+            return;
+        }
+
+        sM.addShow(selectedShow);
+        javax.swing.JOptionPane.showMessageDialog(this, "Added to Master List successfully!");
+    }//GEN-LAST:event_addMasterBActionPerformed
+
+    private void addQueueBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQueueBActionPerformed
+        // TODO add your handling code here:
+        int row = resultsTable.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a show from the table first.");
+            return;
+        }
+
+        show selectedShow = currentResults.get(row);
+
+        // Ensure it's in the Master List first so the Queue can find its title!
+        if (!sM.showExists(selectedShow.getAnilistID(), selectedShow.getMalID(), selectedShow.getEngTitle(), selectedShow.getForTitle())) {
+            sM.addShow(selectedShow);
+        }
+
+        // Add to queue
+        qM.addToQueue(currentUser.getUserID(), selectedShow.getAnilistID());
+        javax.swing.JOptionPane.showMessageDialog(this, "Added to Master List AND your Queue!");
+    }//GEN-LAST:event_addQueueBActionPerformed
+
+    private void searchBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBActionPerformed
+        // TODO add your handling code here:
+         String query = searchF.getText().trim();
+        if (query.isEmpty() || query.equals("Search AniList...")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a show name to search.");
+            return;
+        }
+
+        searchB.setText("Searching...");
+        searchB.setEnabled(false);
+
+        // Fetch from API
+        currentResults = api.fetch(query, null, null, null, null, null, null, null, false, null);
+
+        searchB.setText("Search API");
+        searchB.setEnabled(true);
+
+        if (currentResults == null || currentResults.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No results found.");
+            return;
+        }
+
+        String[] columns = {"AniList ID", "Title", "Episodes"};
+        Object[][] data = new Object[currentResults.size()][3];
+        for (int i = 0; i < currentResults.size(); i++) {
+            show s = currentResults.get(i);
+            data[i][0] = s.getAnilistID();
+            data[i][1] = s.getEngTitle(); 
+            data[i][2] = s.getTotalEpisodes();
+        }
+        resultsTable.setModel(new DefaultTableModel(data, columns) {
+            public boolean isCellEditable(int row, int column) { return false; }
+        });                    
+    }//GEN-LAST:event_searchBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addMasterB;
+    private javax.swing.JButton addQueueB;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable resultsTable;
+    private javax.swing.JButton searchB;
+    private javax.swing.JTextField searchF;
     // End of variables declaration//GEN-END:variables
 }

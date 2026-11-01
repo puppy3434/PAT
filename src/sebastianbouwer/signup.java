@@ -17,6 +17,8 @@ public class signup extends javax.swing.JFrame {
     public signup() {
         initComponents();
         errorL.setVisible(false);
+        setSize(500, 500);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -40,7 +42,9 @@ public class signup extends javax.swing.JFrame {
         loginRedirectB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(547, 379));
+        setLocation(new java.awt.Point(0, 0));
+        setPreferredSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(500, 500));
 
         usernameF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +113,7 @@ public class signup extends javax.swing.JFrame {
                         .addComponent(showpassB))
                     .addComponent(errorL, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signupB))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +137,7 @@ public class signup extends javax.swing.JFrame {
                 .addComponent(errorL)
                 .addGap(18, 18, 18)
                 .addComponent(loginRedirectB)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();

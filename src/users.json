@@ -20,5 +20,18 @@
     "onlineSavePath": "",
     "notifications": true,
     "maxCacheSize": 200
+  },
+  {
+    "userID": "user1",
+    "username": "t",
+    "password": "",
+    "joinDate": "2026-11-01",
+    "isAdmin": false,
+    "theme": "Dark",
+    "reminderTime": "20:00",
+    "localSavePath": "",
+    "onlineSavePath": "",
+    "notifications": true,
+    "maxCacheSize": 200
   }
 ]

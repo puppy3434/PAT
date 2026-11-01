@@ -8,15 +8,22 @@ package sebastianbouwer.panels;
  *
  * @author user
  */
+import sebastianbouwer.backend.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 public class ShowListPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ShowListPanel
      */
+    private ShowManager sM;
     private sebastianbouwer.backend.Account currentUser;
     public ShowListPanel(sebastianbouwer.backend.Account user) {
         initComponents();
         currentUser = user;
+        sM = new ShowManager();
+        refreshTable();
     }
 
     /**
@@ -28,30 +35,146 @@ public class ShowListPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        searchF = new javax.swing.JTextField();
+        searchB = new javax.swing.JButton();
+        addShowB = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        showTable = new javax.swing.JTable();
+        removeB = new javax.swing.JButton();
 
-        jLabel1.setText("showlist panel goes here");
+        setPreferredSize(new java.awt.Dimension(10000, 10000));
+
+        searchF.setMinimumSize(new java.awt.Dimension(200, 30));
+        searchF.setPreferredSize(new java.awt.Dimension(200, 30));
+        searchF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFActionPerformed(evt);
+            }
+        });
+
+        searchB.setText("Filter");
+        searchB.setMaximumSize(new java.awt.Dimension(80, 30));
+        searchB.setMinimumSize(new java.awt.Dimension(80, 30));
+
+        addShowB.setText("Add Show");
+        addShowB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addShowBActionPerformed(evt);
+            }
+        });
+
+        scrollPane.setPreferredSize(new java.awt.Dimension(600, 400));
+
+        showTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Anilist ID", "Title", "Rating", "Episodes", "Added By"
+            }
+        ));
+        showTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        showTable.setRowHeight(25);
+        scrollPane.setViewportView(showTable);
+
+        removeB.setText("Remove Show");
+        removeB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchF, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addShowB)
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(removeB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addShowB))
+                .addGap(18, 18, 18)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(removeB)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFActionPerformed
+
+    private void addShowBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addShowBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addShowBActionPerformed
+
+    private void removeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBActionPerformed
+        // TODO add your handling code here:
+        int selected = showTable.getSelectedRow();
+        if (selected == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a show");
+            return;
+        }
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you would like to remove this show?", 
+                "Confirm", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            sM.removeShow((int) showTable.getValueAt(selected, 0));
+            refreshTable();
+        }
+    }//GEN-LAST:event_removeBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addShowB;
+    private javax.swing.JButton removeB;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JButton searchB;
+    private javax.swing.JTextField searchF;
+    private javax.swing.JTable showTable;
     // End of variables declaration//GEN-END:variables
+
+    private void refreshTable() {
+        List<show> masterList = sM.getAllShows();
+        System.out.println("number of shows loaded: " + masterList.size());
+        String[] columns = {"Anilist ID", "Title", "Rating", "Episodes", "Added By"};
+        Object[][] data = new Object[masterList.size()][5];
+        for (int i = 0; i < masterList.size(); i++) {
+            show s = masterList.get(i);
+            data[i][0] = s.getAnilistID();
+            data[i][1] = s.getEngTitle();
+            data[i][2] = s.getRating();
+            data[i][3] = s.getTotalEpisodes();
+            data[i][4] = s.getAddedBy();
+        }
+        
+        showTable.setModel(new DefaultTableModel(data, columns) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }
 }

@@ -17,7 +17,7 @@ import java.util.*;
 import java.time.LocalDate;
 public class QueueManager {
     private Map<String, List<QueueItem>> queue;
-    private final String filePath = "src/queus.json";
+    private final String filePath = "src/queues.json";
     private final Gson gson;
     
     public QueueManager() {
@@ -62,12 +62,23 @@ public class QueueManager {
                     return;
                 }
             }
-            
-            list.add(new QueueItem(userID, anilistID));
-            saveQueue();
+        QueueItem item = new QueueItem(userID, anilistID);
+        boolean watching = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getStatus().equals("watching")) {
+                watching = true;
+                break;
+            }
         }
+        if (!watching) {
+                item.setStatus("watching");
+            }
+            
+        list.add(item);
+        saveQueue();
+    }
     
-    public void logProgress(String userID, int anilistID, int episodesAdded) {
+    public void logProgress(String userID, int anilistID, int episodesAdded, int totalEps) {
         List<QueueItem> list = getUserQueue(userID);
         for (int i = 0; i < list.size(); i++) {
             QueueItem item = list.get(i);
@@ -79,7 +90,18 @@ public class QueueManager {
                 }
                 item.setEpisodesWatchedToday(item.getEpisodesWatchedToday() + episodesAdded);
                 item.setCurrentEpisode(item.getCurrentEpisode() + episodesAdded);
-                item.setStatus("watching");
+                if (item.getCurrentEpisode() >= totalEps && totalEps > 0) {
+                    item.setStatus("complete");
+                    for (int k = 0; k < list.size(); k++) {
+                        QueueItem nextItem = list.get(k);
+                        if (nextItem.getStatus().equals("pending")) {
+                            nextItem.setStatus("watching");
+                            break;
+                        }
+                    }
+                } else {
+                    item.setStatus("watching");
+                }
                 saveQueue();
                 return;
             }

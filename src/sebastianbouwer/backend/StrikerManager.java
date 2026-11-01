@@ -16,12 +16,13 @@ import java.time.*;
 
 public class StrikerManager {
     private List<strike> strikes;
-    private final String FILEPATH = "";//idk
+    private final String FILEPATH = "src/strikes.json";//idk
     private final Gson gson;
     
     public StrikerManager() {
         gson = new GsonBuilder().setPrettyPrinting().create();
         strikes = new ArrayList<>();
+        readStrikes();
     }
     
     private void readStrikes() {
@@ -56,7 +57,7 @@ public class StrikerManager {
     }
     
     public void issueStrike(String userID, String reason, int punishmentID, QueueManager qM) {
-        strike newStrike = new strike(userID, reason);
+        strike newStrike = new strike(userID, reason, punishmentID);
         strikes.add(newStrike);
         saveStrike();
         qM.addPunishment(userID, punishmentID);
@@ -84,11 +85,22 @@ public class StrikerManager {
         qM.saveQueue();
     }
     
+    public int getActiveStrikeCount(String userID) {
+        int count = 0;
+        for (int i = 0; i < strikes.size(); i++) {
+            if (strikes.get(i).getUserID().equals(userID) 
+                    && !strikes.get(i).getVoided()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
     public static class strike {
         private String userID, dateIssued, reason;
         private boolean isVoided;
         
-        public strike(String inUID, String inR) {
+        public strike(String inUID, String inR, int inPID) {
             userID = inUID;
             reason = inR;
             dateIssued = LocalDate.now().toString();

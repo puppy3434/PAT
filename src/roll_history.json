@@ -1,0 +1,702 @@
+[
+  {
+    "userID": "user1",
+    "engTitle": "Jujutsu Kaisen",
+    "dateRolled": "2026-11-01 21:16:29",
+    "rollType": "Master List",
+    "anilistID": 113415
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Hunter x Hunter (2011)",
+    "dateRolled": "2026-11-01 21:16:29",
+    "rollType": "Master List",
+    "anilistID": 11061
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Steins;Gate",
+    "dateRolled": "2026-11-01 21:20:29",
+    "rollType": "Master List",
+    "anilistID": 9253
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Your Lie in April",
+    "dateRolled": "2026-11-01 21:20:29",
+    "rollType": "Master List",
+    "anilistID": 20665
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Made in Abyss",
+    "dateRolled": "2026-11-01 21:20:30",
+    "rollType": "Master List",
+    "anilistID": 97986
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Overlord",
+    "dateRolled": "2026-11-01 21:20:30",
+    "rollType": "Master List",
+    "anilistID": 20832
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Attack on Titan: The Final Season",
+    "dateRolled": "2026-11-01 21:20:30",
+    "rollType": "Master List",
+    "anilistID": 110277
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto",
+    "dateRolled": "2026-11-01 21:20:37",
+    "rollType": "Franchise Chain",
+    "anilistID": 20
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto: Shippuden",
+    "dateRolled": "2026-11-01 21:20:37",
+    "rollType": "Master List",
+    "anilistID": 1735
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Made in Abyss",
+    "dateRolled": "2026-11-01 21:20:38",
+    "rollType": "Master List",
+    "anilistID": 97986
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:ZERO -Starting Life in Another World- Season 2",
+    "dateRolled": "2026-11-01 21:20:38",
+    "rollType": "Franchise Chain",
+    "anilistID": 108632
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:Zero - Starting Life in Another World",
+    "dateRolled": "2026-11-01 21:20:38",
+    "rollType": "Master List",
+    "anilistID": 21355
+  },
+  {
+    "userID": "user1",
+    "engTitle": "BLEACH: Thousand-Year Blood War",
+    "dateRolled": "2026-11-01 21:20:38",
+    "rollType": "Franchise Chain",
+    "anilistID": 116674
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Bleach",
+    "dateRolled": "2026-11-01 21:20:38",
+    "rollType": "Master List",
+    "anilistID": 269
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Neon Genesis Evangelion",
+    "dateRolled": "2026-11-01 21:20:39",
+    "rollType": "Master List",
+    "anilistID": 30
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Spy x Family",
+    "dateRolled": "2026-11-01 21:20:45",
+    "rollType": "Master List",
+    "anilistID": 140960
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Code Geass: Lelouch of the Rebellion",
+    "dateRolled": "2026-11-01 21:20:46",
+    "rollType": "Master List",
+    "anilistID": 1575
+  },
+  {
+    "userID": "user1",
+    "engTitle": "One Punch Man",
+    "dateRolled": "2026-11-01 21:20:46",
+    "rollType": "Master List",
+    "anilistID": 21087
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Kaguya-sama: Love is War",
+    "dateRolled": "2026-11-01 21:20:47",
+    "rollType": "Master List",
+    "anilistID": 101921
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:ZERO -Starting Life in Another World-",
+    "dateRolled": "2026-11-01 21:20:47",
+    "rollType": "Franchise Chain",
+    "anilistID": 21355
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:Zero Season 2",
+    "dateRolled": "2026-11-01 21:20:47",
+    "rollType": "Master List",
+    "anilistID": 108632
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+    "dateRolled": "2026-11-01 21:20:52",
+    "rollType": "Franchise Chain",
+    "anilistID": 142329
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Jujutsu Kaisen Season 2",
+    "dateRolled": "2026-11-01 21:20:52",
+    "rollType": "Master List",
+    "anilistID": 145139
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Erased",
+    "dateRolled": "2026-11-01 21:20:52",
+    "rollType": "Master List",
+    "anilistID": 21127
+  },
+  {
+    "userID": "user1",
+    "engTitle": "One Piece",
+    "dateRolled": "2026-11-01 21:20:53",
+    "rollType": "Master List",
+    "anilistID": 21
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto: Shippuden",
+    "dateRolled": "2026-11-01 21:20:53",
+    "rollType": "Franchise Chain",
+    "anilistID": 1735
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto",
+    "dateRolled": "2026-11-01 21:20:53",
+    "rollType": "Master List",
+    "anilistID": 20
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 2",
+    "dateRolled": "2026-11-01 21:20:54",
+    "rollType": "Franchise Chain",
+    "anilistID": 21856
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 3",
+    "dateRolled": "2026-11-01 21:20:54",
+    "rollType": "Master List",
+    "anilistID": 100166
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Code Geass: Lelouch of the Rebellion",
+    "dateRolled": "2026-11-01 21:23:06",
+    "rollType": "Master List",
+    "anilistID": 1575
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Franchise Chain",
+    "anilistID": 142329
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Franchise Chain",
+    "anilistID": 101922
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Demon Slayer: Mugen Train Arc",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Master List",
+    "anilistID": 112151
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Franchise Chain",
+    "anilistID": 20
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto: Shippuden",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Master List",
+    "anilistID": 1735
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 2",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Franchise Chain",
+    "anilistID": 21856
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 3",
+    "dateRolled": "2026-11-01 21:23:07",
+    "rollType": "Master List",
+    "anilistID": 100166
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 3",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Franchise Chain",
+    "anilistID": 100166
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Franchise Chain",
+    "anilistID": 21459
+  },
+  {
+    "userID": "user1",
+    "engTitle": "My Hero Academia Season 2",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Master List",
+    "anilistID": 21856
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Cowboy Bebop",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Master List",
+    "anilistID": 1
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto: Shippuden",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Franchise Chain",
+    "anilistID": 1735
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Naruto",
+    "dateRolled": "2026-11-01 21:23:08",
+    "rollType": "Master List",
+    "anilistID": 20
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Bleach",
+    "dateRolled": "2026-11-01 21:23:09",
+    "rollType": "Franchise Chain",
+    "anilistID": 269
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Bleach: Thousand-Year Blood War",
+    "dateRolled": "2026-11-01 21:23:09",
+    "rollType": "Master List",
+    "anilistID": 116674
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Dr. Stone",
+    "dateRolled": "2026-11-01 21:23:09",
+    "rollType": "Master List",
+    "anilistID": 105333
+  },
+  {
+    "userID": "user1",
+    "engTitle": "BLEACH: Thousand-Year Blood War",
+    "dateRolled": "2026-11-01 21:23:10",
+    "rollType": "Franchise Chain",
+    "anilistID": 116674
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Bleach",
+    "dateRolled": "2026-11-01 21:23:10",
+    "rollType": "Master List",
+    "anilistID": 269
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Death Note",
+    "dateRolled": "2026-11-01 21:34:42",
+    "rollType": "Master List",
+    "anilistID": 1535
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Kaguya-sama: Love is War",
+    "dateRolled": "2026-11-01 21:34:43",
+    "rollType": "Master List",
+    "anilistID": 101921
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Neon Genesis Evangelion",
+    "dateRolled": "2026-11-01 21:34:43",
+    "rollType": "Master List",
+    "anilistID": 30
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:ZERO -Starting Life in Another World-",
+    "dateRolled": "2026-11-01 21:34:44",
+    "rollType": "Franchise Chain",
+    "anilistID": 21355
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Re:Zero Season 2",
+    "dateRolled": "2026-11-01 21:34:44",
+    "rollType": "Master List",
+    "anilistID": 108632
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Spy x Family",
+    "dateRolled": "2026-11-01 21:34:44",
+    "rollType": "Master List",
+    "anilistID": 140960
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Attack on Titan Season 2",
+    "dateRolled": "2026-11-01 21:34:44",
+    "rollType": "Franchise Chain",
+    "anilistID": 20958
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Attack on Titan",
+    "dateRolled": "2026-11-01 21:34:44",
+    "rollType": "Master List",
+    "anilistID": 16498
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Tokyo Ghoul",
+    "dateRolled": "2026-11-01 21:34:45",
+    "rollType": "Master List",
+    "anilistID": 20605
+  },
+  {
+    "userID": "user1",
+    "engTitle": "One Piece",
+    "dateRolled": "2026-11-01 21:34:46",
+    "rollType": "Master List",
+    "anilistID": 21
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Frieren: Beyond Journey’s End Season 2",
+    "dateRolled": "2026-11-01 21:34:46",
+    "rollType": "Franchise Chain",
+    "anilistID": 182255
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Frieren: Beyond Journey\u0027s End",
+    "dateRolled": "2026-11-01 21:34:46",
+    "rollType": "Master List",
+    "anilistID": 154587
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+    "dateRolled": "2026-11-01 21:34:47",
+    "rollType": "Franchise Chain",
+    "anilistID": 142329
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Jujutsu Kaisen Season 2",
+    "dateRolled": "2026-11-01 21:34:47",
+    "rollType": "Master List",
+    "anilistID": 145139
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Attack on Titan Season 3",
+    "dateRolled": "2026-11-01 21:43:10",
+    "rollType": "Franchise Chain",
+    "anilistID": 99147
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Attack on Titan",
+    "dateRolled": "2026-11-01 21:43:10",
+    "rollType": "Franchise Chain",
+    "anilistID": 16498
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Attack on Titan Season 2",
+    "dateRolled": "2026-11-01 21:43:10",
+    "rollType": "Master List",
+    "anilistID": 20958
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Re:ZERO -Starting Life in Another World-",
+    "dateRolled": "2026-11-01 21:43:10",
+    "rollType": "Franchise Chain",
+    "anilistID": 21355
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Re:Zero Season 2",
+    "dateRolled": "2026-11-01 21:43:10",
+    "rollType": "Master List",
+    "anilistID": 108632
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Kuroko\u0027s Basketball",
+    "dateRolled": "2026-11-01 21:43:11",
+    "rollType": "Master List",
+    "anilistID": 11771
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Mob Psycho 100",
+    "dateRolled": "2026-11-01 21:43:11",
+    "rollType": "Master List",
+    "anilistID": 21507
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Steins;Gate",
+    "dateRolled": "2026-11-01 21:43:11",
+    "rollType": "Master List",
+    "anilistID": 9253
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "The Promised Neverland",
+    "dateRolled": "2026-11-01 21:43:12",
+    "rollType": "Master List",
+    "anilistID": 101759
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Frieren: Beyond Journey’s End",
+    "dateRolled": "2026-11-01 21:43:12",
+    "rollType": "Franchise Chain",
+    "anilistID": 154587
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Frieren: Beyond Journey\u0027s End Season 2",
+    "dateRolled": "2026-11-01 21:43:12",
+    "rollType": "Master List",
+    "anilistID": 182255
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba Entertainment District Arc",
+    "dateRolled": "2026-11-01 21:43:12",
+    "rollType": "Franchise Chain",
+    "anilistID": 142329
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Jujutsu Kaisen Season 2",
+    "dateRolled": "2026-11-01 21:43:12",
+    "rollType": "Master List",
+    "anilistID": 145139
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Re:ZERO -Starting Life in Another World- Season 2",
+    "dateRolled": "2026-11-01 21:43:13",
+    "rollType": "Franchise Chain",
+    "anilistID": 108632
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Re:Zero - Starting Life in Another World",
+    "dateRolled": "2026-11-01 21:43:13",
+    "rollType": "Master List",
+    "anilistID": 21355
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Vinland Saga",
+    "dateRolled": "2026-11-01 21:43:13",
+    "rollType": "Master List",
+    "anilistID": 101991
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "KonoSuba: God\u0027s Blessing on this Wonderful World!",
+    "dateRolled": "2026-11-01 21:43:13",
+    "rollType": "Master List",
+    "anilistID": 21202
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Hunter x Hunter (2011)",
+    "dateRolled": "2026-11-01 21:43:14",
+    "rollType": "Master List",
+    "anilistID": 11061
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Sword Art Online",
+    "dateRolled": "2026-11-01 21:43:14",
+    "rollType": "Master List",
+    "anilistID": 11757
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "My Hero Academia Season 2",
+    "dateRolled": "2026-11-01 21:43:15",
+    "rollType": "Franchise Chain",
+    "anilistID": 21856
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "My Hero Academia",
+    "dateRolled": "2026-11-01 21:43:15",
+    "rollType": "Master List",
+    "anilistID": 21459
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Tengen Toppa Gurren Lagann",
+    "dateRolled": "2026-11-01 21:43:15",
+    "rollType": "Master List",
+    "anilistID": 2001
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Erased",
+    "dateRolled": "2026-11-01 21:43:15",
+    "rollType": "Master List",
+    "anilistID": 21127
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Franchise Chain",
+    "anilistID": 112151
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Master List",
+    "anilistID": 101922
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer: Kimetsu no Yaiba Swordsmith Village Arc",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Franchise Chain",
+    "anilistID": 145139
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Franchise Chain",
+    "anilistID": 112151
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Demon Slayer: Entertainment District Arc",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Master List",
+    "anilistID": 142329
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Your Lie in April",
+    "dateRolled": "2026-11-01 21:43:16",
+    "rollType": "Master List",
+    "anilistID": 20665
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "BLEACH: Thousand-Year Blood War",
+    "dateRolled": "2026-11-01 21:43:17",
+    "rollType": "Franchise Chain",
+    "anilistID": 116674
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Bleach",
+    "dateRolled": "2026-11-01 21:43:17",
+    "rollType": "Master List",
+    "anilistID": 269
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Kaguya-sama: Love is War",
+    "dateRolled": "2026-11-01 21:43:17",
+    "rollType": "Master List",
+    "anilistID": 101921
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Attack on Titan Season 2",
+    "dateRolled": "2026-11-01 21:43:18",
+    "rollType": "Franchise Chain",
+    "anilistID": 20958
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Attack on Titan Season 3",
+    "dateRolled": "2026-11-01 21:43:18",
+    "rollType": "Master List",
+    "anilistID": 99147
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Death Note",
+    "dateRolled": "2026-11-01 21:43:18",
+    "rollType": "Master List",
+    "anilistID": 1535
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Tokyo Ghoul",
+    "dateRolled": "2026-11-01 21:43:18",
+    "rollType": "Master List",
+    "anilistID": 20605
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "engTitle": "Psycho-Pass",
+    "dateRolled": "2026-11-01 21:43:19",
+    "rollType": "Master List",
+    "anilistID": 13601
+  },
+  {
+    "userID": "user1",
+    "engTitle": "Sword Art Online",
+    "dateRolled": "2026-11-01 22:42:50",
+    "rollType": "Master List",
+    "anilistID": 11757
+  }
+]

@@ -4,6 +4,9 @@
  */
 package sebastianbouwer.panels;
 
+import java.util.List;
+import sebastianbouwer.backend.*;
+
 /**
  *
  * @author user
@@ -13,10 +16,20 @@ public class RollPanel extends javax.swing.JPanel {
     /**
      * Creates new form RollPanel
      */
-    private sebastianbouwer.backend.Account currentUser;
-    public RollPanel(sebastianbouwer.backend.Account user) {
+    private RollManager rM;
+    private ShowManager sM;
+    private QueueManager qM;
+    private AniListAPI api;
+    private Account currentUser;
+    public RollPanel(Account user) {
         initComponents();
         currentUser = user;
+        rM = new RollManager();
+        sM = new ShowManager();
+        qM = new QueueManager();
+        api = new AniListAPI();
+        
+        resultArea.setEditable(false);
     }
 
     /**
@@ -28,30 +41,178 @@ public class RollPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        batchF = new javax.swing.JTextField();
+        modeCB = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        randomT = new javax.swing.JCheckBox();
+        rollB = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resultArea = new javax.swing.JTextArea();
 
-        jLabel1.setText("roll panel goes here");
+        jLabel2.setText("Number of shows to roll:");
+
+        batchF.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        batchF.setText("1");
+        batchF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batchFActionPerformed(evt);
+            }
+        });
+
+        modeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unweighted", "higher", "lower" }));
+        modeCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeCBActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Weighting:");
+
+        jLabel1.setText("Roll random show?");
+
+        randomT.setText("Random");
+
+        rollB.setText("Roll!");
+        rollB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rollBActionPerformed(evt);
+            }
+        });
+
+        resultArea.setColumns(20);
+        resultArea.setRows(5);
+        jScrollPane1.setViewportView(resultArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rollB)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(randomT)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(modeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(batchF, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(batchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(randomT))
+                .addGap(18, 18, 18)
+                .addComponent(rollB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void batchFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batchFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_batchFActionPerformed
+
+    private void modeCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeCBActionPerformed
+
+    private void rollBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollBActionPerformed
+        // TODO add your handling code here:
+        String batch = batchF.getText();
+        int batchCount = 1;
+        try {
+            batchCount = Integer.parseInt(batch);
+            if (batchCount < 1) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter a number higher than 0");
+                return;
+            }
+        }
+        catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Enter a valid number");
+            return;
+        }
+        
+        String mode = modeCB.getSelectedItem().toString();
+        boolean isRandomAPI = randomT.isSelected();
+        
+        if (isRandomAPI && batchCount > 10) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Due to rate Limiting, enter a number smaller than 10");
+            return;
+        }
+        
+        rollB.setEnabled(false);
+        rollB.setText("Rolling...");
+        resultArea.setText("");
+        
+        List<show> masterList = sM.getAllShows();
+        if (masterList.isEmpty() && !isRandomAPI) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Master List is empty!");
+            rollB.setEnabled(true);
+            rollB.setText("Roll!");
+            return;
+        }
+        
+        List<RollManager.RollResult> rolledResults = rM.roll(currentUser.getUserID(),
+                batchCount, mode, isRandomAPI, masterList, qM, api);
+        if (rolledResults.isEmpty()) {
+            resultArea.setText("No shows were rolled");
+        }
+        else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Results:\n\n");
+            for (int i = 0; i < rolledResults.size(); i++) {
+                RollManager.RollResult result = rolledResults.get(i);;
+                show base = result.baseShow;
+                sb.append("Number ").append(i+1).append(" - ").append(base.getEngTitle()).append(":\n");
+                List<show> franchise = result.franchiseShows;
+                for (int k = 0; k < franchise.size(); k++) {
+                    show fShow = franchise.get(k);
+                    String prefix = (fShow.getAnilistID() == base.getAnilistID())?
+                    " - Show: " : "- Related: ";
+                    sb.append(prefix).append(fShow.getEngTitle()).append(" (").append(fShow.getTotalEpisodes()).append(" eps)\n");
+                }
+                sb.append("\n");
+            }
+            sb.append("These shows have been added to your queue.");
+            resultArea.setText(sb.toString());
+        }
+        
+        rollB.setEnabled(true);
+        rollB.setText("Roll!");
+    }//GEN-LAST:event_rollBActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField batchF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> modeCB;
+    private javax.swing.JCheckBox randomT;
+    private javax.swing.JTextArea resultArea;
+    private javax.swing.JButton rollB;
     // End of variables declaration//GEN-END:variables
 }

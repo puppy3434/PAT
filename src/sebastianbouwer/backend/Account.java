@@ -57,10 +57,6 @@ public class Account {
         username = user;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
-    }
-
     public String getTheme() {
         return theme;
     }
