@@ -6,6 +6,8 @@ package sebastianbouwer;
 
 import java.awt.CardLayout;
 import sebastianbouwer.backend.Account;
+import sebastianbouwer.backend.QueueManager;
+import sebastianbouwer.backend.StrikerManager;
 import sebastianbouwer.panels.*;
 
 /**
@@ -44,6 +46,14 @@ public class shell extends javax.swing.JFrame {
         SearchAddPanel searchadd = new SearchAddPanel(user);
         
         cardContainer.add(dashboard, "Dashboard");
+        try {
+            StrikerManager strikeM = new StrikerManager();
+            QueueManager qM = new QueueManager();
+            // We use AniList ID 21 (One Piece) as the default punishment show
+            strikeM.dailyCheck(qM, 21); 
+        } catch (Exception e) {
+            System.out.println("Daily check failed: " + e.getMessage());
+        }
         cardContainer.add(showlist, "Show List");
         cardContainer.add(queue, "Queue");
         cardContainer.add(roll, "Roll");
@@ -76,7 +86,7 @@ public class shell extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        headerP.setBackground(new java.awt.Color(102, 102, 255));
+        headerP.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Anime Media Challenge");
@@ -109,7 +119,7 @@ public class shell extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        sidebarP.setBackground(new java.awt.Color(153, 255, 153));
+        sidebarP.setBackground(new java.awt.Color(102, 102, 102));
 
         dashboardB.setText("Dashboard");
         dashboardB.addActionListener(new java.awt.event.ActionListener() {

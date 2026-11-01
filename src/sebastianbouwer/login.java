@@ -41,6 +41,7 @@ private boolean show = true;
         signupRedirectB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 51, 51));
         setSize(new java.awt.Dimension(500, 500));
 
         usernameF.addActionListener(new java.awt.event.ActionListener() {

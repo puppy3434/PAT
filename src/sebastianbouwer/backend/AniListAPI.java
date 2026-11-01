@@ -7,6 +7,9 @@ package sebastianbouwer.backend;
 /**
  *
  * @author user
+ * 
+ * creates a structured json query that sends to AniList GraphQL API to get a shows anilistID, MAL (my anime list) ID,
+ * genres, rating, format (ova, special, etc), year released and its relationships with other shows
  */
 import sebastianbouwer.backend.*;
 import com.google.gson.*;
