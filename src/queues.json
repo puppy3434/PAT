@@ -2,11 +2,11 @@
   "user1": [
     {
       "userID": "user1",
-      "lastLogDate": "2026-11-01",
+      "lastLogDate": "2026-11-02",
       "status": "watching",
       "anilistID": 1535,
-      "currentEpisode": 35,
-      "episodesWatchedToday": 35
+      "currentEpisode": 36,
+      "episodesWatchedToday": 1
     },
     {
       "userID": "user1",

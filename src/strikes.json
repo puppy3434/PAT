@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "userID": "user1",
+    "dateIssued": "2026-11-02",
+    "reason": "Missed logging progress",
+    "isVoided": false
+  },
+  {
+    "userID": "6e91981b-be4e-42d3-b252-f68ed19bc513",
+    "dateIssued": "2026-11-02",
+    "reason": "Missed logging progress",
+    "isVoided": false
+  }
+]
